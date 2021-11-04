@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">sQan</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="qr_scan">QR Scan</string>
+    <string name="logs_fragment">Logs</string>
+    <string name="location">Location</string>
+    <string name="settings">Settings</string>
+    <string name="User">User</string>
+    <string name="last_seen">Last seen:</string>
+    <string name="scan_qr">Scan QR</string>
+    <string name="logs">Logs</string>
+    <string name="new_location">new location</string>
+    <string name="add">Add Location</string>
+    <string name="history">History:</string>
+    <string name="locatino_info">location information</string>
+    <string name="add_location">Add Location</string>
+    <string name="info">Go to \'DashBoard\' and add a location.</string>
+</resources>

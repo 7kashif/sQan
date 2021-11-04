@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuDashboard"
+        android:title="@string/dashboard"
+        android:icon="@drawable/ic_dashboard"/>
+
+    <item
+        android:id="@+id/menuQr"
+        android:title="@string/qr_scan"
+        android:icon="@drawable/ic_qrcode"/>
+
+    <item
+        android:id="@+id/menuLogs"
+        android:title="@string/logs_fragment"
+        android:icon="@drawable/ic_log"/>
+
+    <item
+        android:id="@+id/menuLocation"
+        android:title="@string/location"
+        android:icon="@drawable/ic_location"/>
+
+    <item
+        android:id="@+id/menuSettings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings"/>
+
+</menu>

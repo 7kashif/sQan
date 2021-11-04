@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "644035185035",
+    "project_id": "sqan-6d71a",
+    "storage_bucket": "sqan-6d71a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644035185035:android:f1449ca30c83494a01078e",
+        "android_client_info": {
+          "package_name": "com.scanner.sqan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "644035185035-s41s70uohuibdl8ucjkkist1te8qvhfv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAy-orUucX1pwMFoSXMImYbCEn-E3uLiE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644035185035-s41s70uohuibdl8ucjkkist1te8qvhfv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
