@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.scanner.sqan.R
 import com.scanner.sqan.databinding.HomeFragmentBinding
 
@@ -17,49 +19,12 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = HomeFragmentBinding.inflate(inflater)
-        val dashboardFragment = DashboardFragment()
-        val qrFragment = QrFragment()
-        val locationsFragment = LocationsFragment()
-        val logsFragment = LogsFragment()
-        val settingsFragment = SettingsFragment()
 
-
-        binding.railNavView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.menuDashboard -> {
-                    replaceFragment(dashboardFragment)
-                    true
-                }
-                R.id.menuQr ->  {
-                    replaceFragment(qrFragment)
-                    true
-                }
-                R.id.menuLocation ->  {
-                    replaceFragment(locationsFragment)
-                    true
-                }
-                R.id.menuLogs ->  {
-                    replaceFragment(logsFragment)
-                    true
-                }
-                R.id.menuSettings ->  {
-                    replaceFragment(settingsFragment)
-                    true
-                }
-                else -> {
-                    true
-                }
-            }
-        }
+        val navHost = childFragmentManager.findFragmentById(binding.homeFragmentContainer.id) as NavHostFragment
+        val controller = navHost.navController
+        NavigationUI.setupWithNavController(binding.drawerNavView,controller)
 
         return binding.root
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        childFragmentManager
-            .beginTransaction()
-            .replace(R.id.homeFragmentContainer, fragment)
-            .commit()
     }
 
 }

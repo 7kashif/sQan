@@ -3,13 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/drawable/ic_add.xml" value="0.1935185185185185" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/drawable/ic_lock.xml" value="0.21770833333333334" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/drawable/ic_person.xml" value="0.1375" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/drawable/tv_frame.xml" value="0.1935185185185185" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/add_location_fragment.xml" value="0.22" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/dashboard_fragment.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/device_info_fragment.xml" value="0.2" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/home_fragment.xml" value="0.18896484375" />
+        <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/location_detail_fragment.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/location_fragment.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/locations_list_item.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/login_fragment.xml" value="0.2015625" />

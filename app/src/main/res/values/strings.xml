@@ -19,4 +19,11 @@
     <string name="locatino_info">location information</string>
     <string name="add_location">Add Location</string>
     <string name="info">Go to \'DashBoard\' and add a location.</string>
+    <string name="registered_devices">Registered Devices:</string>
+    <string name="device">Device:</string>
+    <string name="location_id">Location ID:</string>
+    <string name="last_repaire_date">Last repaire date</string>
+    <string name="report">Report:</string>
+    <string name="update">Update</string>
+    <string name="set_editable_text">%1$s</string>
 </resources>

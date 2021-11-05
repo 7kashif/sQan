@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/midnight_blue"
+        android:indeterminateOnly="true"
+        android:indeterminateBehavior="cycle"
+        android:visibility="gone"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvLocationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:textColor="@color/midnight_blue"
+        app:layout_constraintTop_toBottomOf="@id/progressBar"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Location Name" />
+
+    <TextView
+        android:id="@+id/tvLocationInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="22sp"
+        android:padding="8dp"
+        android:textColor="@color/midnight_blue"
+        android:background="@drawable/tv_frame"
+        app:layout_constraintTop_toBottomOf="@id/tvLocationName"
+        tools:text="this is the server room. and it is \n used as server room."/>
+
+    <TextView
+        android:id="@+id/tvRegisteredDevices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="22sp"
+        android:padding="8dp"
+        android:text="@string/registered_devices"
+        android:textColor="@color/midnight_blue"
+        app:layout_constraintTop_toBottomOf="@id/tvLocationInfo"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRegisteredDevices"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        app:layout_constraintTop_toBottomOf="@id/tvRegisteredDevices"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

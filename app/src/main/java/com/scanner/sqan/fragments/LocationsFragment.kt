@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.scanner.sqan.R
 import com.scanner.sqan.adapter.LocationAdapter
 import com.scanner.sqan.databinding.LocationFragmentBinding
 import com.scanner.sqan.models.Progress
@@ -37,7 +39,10 @@ class LocationsFragment:Fragment() {
 
     private fun addClickListeners() {
         locationsAdapter.onLocationItemClickListener {
-            Toast.makeText(activity,it.fbDocumentId,Toast.LENGTH_SHORT).show()
+            val bundle = Bundle().apply {
+                putParcelable("location",it)
+            }
+            findNavController().navigate(R.id.action_locationsFragment_to_locationDetailFragment,bundle)
         }
     }
 

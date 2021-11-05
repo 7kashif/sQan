@@ -34,6 +34,12 @@
         <action
             android:id="@+id/action_qrFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_qrFragment_to_locationDetailFragment"
+            app:destination="@id/locationDetailFragment" />
+        <action
+            android:id="@+id/action_qrFragment_to_deviceInfoFragment"
+            app:destination="@id/deviceInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/locationsFragment"
@@ -43,6 +49,9 @@
         <action
             android:id="@+id/action_locationsFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_locationsFragment_to_locationDetailFragment"
+            app:destination="@id/locationDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/logsFragment"
@@ -70,5 +79,38 @@
         <action
             android:id="@+id/action_addLocationFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/locationDetailFragment"
+        android:name="com.scanner.sqan.fragments.LocationDetailFragment"
+        android:label="LocationDetailFragment"
+        tools:layout="@layout/location_detail_fragment">
+        <argument
+            android:name="location"
+            app:argType="com.scanner.sqan.models.LocationModel"/>
+        <action
+            android:id="@+id/action_locationDetailFragment_to_qrFragment"
+            app:destination="@id/qrFragment" />
+        <action
+            android:id="@+id/action_locationDetailFragment_to_locationsFragment"
+            app:destination="@id/locationsFragment" />
+        <action
+            android:id="@+id/action_locationDetailFragment_to_deviceInfoFragment"
+            app:destination="@id/deviceInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deviceInfoFragment"
+        android:name="com.scanner.sqan.fragments.DeviceInfoFragment"
+        android:label="DeviceInfoFragment"
+        tools:layout="@layout/device_info_fragment">
+        <argument
+            android:name="device"
+            app:argType="com.scanner.sqan.models.DeviceModel"/>
+        <action
+            android:id="@+id/action_deviceInfoFragment_to_locationDetailFragment"
+            app:destination="@id/locationDetailFragment" />
+        <action
+            android:id="@+id/action_deviceInfoFragment_to_qrFragment"
+            app:destination="@id/qrFragment" />
     </fragment>
 </navigation>

@@ -13,11 +13,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.Barcode.FORMAT_QR_CODE
+import com.scanner.sqan.R
 import com.scanner.sqan.analyzer.BarCodeAndQRCodeAnalyser
 import com.scanner.sqan.databinding.QrFragmentBinding
+import com.scanner.sqan.models.Progress
+import com.scanner.sqan.viewModels.DeviceViewModel
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.math.abs
@@ -28,12 +34,13 @@ const val RATIO_4_3_VALUE = 4.0 / 3.0
 const val RATIO_16_9_VALUE = 16.0 / 9.0
 typealias BarcodeAnalyzerListener = (barcode: MutableList<Barcode>) -> Unit
 
-class QrFragment:Fragment() {
+class QrFragment : Fragment() {
     private val requiredPermissions = arrayOf(Manifest.permission.CAMERA)
     private var processingBarcode = AtomicBoolean(false)
     private lateinit var cameraInfo: CameraInfo
     private lateinit var cameraControl: CameraControl
-    private lateinit var binding : QrFragmentBinding
+    private lateinit var binding: QrFragmentBinding
+    private val viewModel: DeviceViewModel by activityViewModels()
 
     private val executor by lazy {
         Executors.newSingleThreadExecutor()
@@ -45,27 +52,32 @@ class QrFragment:Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = QrFragmentBinding.inflate(inflater)
+        addObservers()
 
-        multiPermissionCallback.launch(
-            requiredPermissions
-        )
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if(!allPermissionsGranted()) {
+            requestAllPermissions()
+        }
         if (allPermissionsGranted()) {
-            binding.viewFinder.post {
-                startCamera()
-            }
+           if(binding.viewFinder.rootView != null) {
+               binding.viewFinder.post {
+                   startCamera()
+               }
+           }
         } else {
             requestAllPermissions()
         }
-
-
-        return binding.root
     }
 
     private val multiPermissionCallback =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
             if (map.entries.isEmpty()) {
-                Toast.makeText(activity, "Please Accept all the permissions", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Please Accept all the permissions", Toast.LENGTH_SHORT)
+                    .show()
             } else {
                 binding.viewFinder.post {
                     startCamera()
@@ -91,7 +103,6 @@ class QrFragment:Fragment() {
 
     @SuppressLint("UnsafeExperimentalUsageError")
     private fun startCamera() {
-
 
         // Get screen metrics used to setup camera for full screen resolution
         val metrics = DisplayMetrics().also { binding.viewFinder.display.getRealMetrics(it) }
@@ -160,7 +171,7 @@ class QrFragment:Fragment() {
                     /**
                      * Change update  to true if you want to scan only one barcode or it will continue scaning after detecting for the first time
                      */
-                    if (processingBarcode.compareAndSet(false, false)) {
+                    if (processingBarcode.compareAndSet(false, true)) {
                         onBarcodeDetected(barcode)
                     }
                 })
@@ -171,17 +182,35 @@ class QrFragment:Fragment() {
         if (barcodes.isNotEmpty()) {
 
             //binding.BarcodeValue.text = barcodes[0].rawValue
-            if (barcodes[0].format == FORMAT_QR_CODE) {
-                Toast.makeText(activity, "QR code Detected", Toast.LENGTH_SHORT).show()
-            } else {
-
-                Toast.makeText(activity, "Bar code Detected", Toast.LENGTH_SHORT).show()
-            }
-
-
+            if (barcodes[0].format == FORMAT_QR_CODE)
+                viewModel.getDeviceWithId(barcodes[0].rawValue!!)
         }
     }
 
-
+    private fun addObservers() {
+        binding.apply {
+            viewModel.deviceLoadingProgress.observe(viewLifecycleOwner, {
+                when (it) {
+                    is Progress.Loading -> {
+                        progressBar.isVisible = true
+                    }
+                    is Progress.Error -> {
+                        progressBar.isVisible = false
+                        Toast.makeText(activity, it.error, Toast.LENGTH_LONG).show()
+                    }
+                    is Progress.DeviceLoaded -> {
+                        progressBar.isVisible = false
+                        findNavController().navigate(
+                            R.id.action_qrFragment_to_deviceInfoFragment,
+                            it.bundle
+                        )
+                    }
+                    else -> {
+                        progressBar.isVisible = false
+                    }
+                }
+            })
+        }
+    }
 
 }

@@ -2,27 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menuDashboard"
+        android:id="@+id/dashboardFragment"
         android:title="@string/dashboard"
         android:icon="@drawable/ic_dashboard"/>
 
     <item
-        android:id="@+id/menuQr"
+        android:id="@+id/qrFragment"
         android:title="@string/qr_scan"
         android:icon="@drawable/ic_qrcode"/>
 
     <item
-        android:id="@+id/menuLogs"
+        android:id="@+id/logsFragment"
         android:title="@string/logs_fragment"
         android:icon="@drawable/ic_log"/>
 
     <item
-        android:id="@+id/menuLocation"
+        android:id="@+id/locationsFragment"
         android:title="@string/location"
         android:icon="@drawable/ic_location"/>
 
     <item
-        android:id="@+id/menuSettings"
+        android:id="@+id/settingsFragment"
         android:title="@string/settings"
         android:icon="@drawable/ic_settings"/>
 
