@@ -14,12 +14,14 @@ import com.scanner.sqan.R
 import com.scanner.sqan.adapter.DevicesAdapter
 import com.scanner.sqan.databinding.LocationDetailFragmentBinding
 import com.scanner.sqan.models.Progress
+import com.scanner.sqan.viewModels.DeviceViewModel
 import com.scanner.sqan.viewModels.LocationsViewModel
 
 class LocationDetailFragment : Fragment() {
     private lateinit var binding : LocationDetailFragmentBinding
     private val args : LocationDetailFragmentArgs by navArgs()
     private val viewModel: LocationsViewModel by activityViewModels()
+    private val deviceViewModel: DeviceViewModel by activityViewModels()
     private val devicesAdapter = DevicesAdapter()
 
     override fun onCreateView(
@@ -46,10 +48,7 @@ class LocationDetailFragment : Fragment() {
 
     private fun addClickListener() {
         devicesAdapter.onDeviceItemClickListener {
-            val bundle= Bundle().apply {
-                putParcelable("device",it)
-            }
-            findNavController().navigate(R.id.action_locationDetailFragment_to_deviceInfoFragment,bundle)
+            deviceViewModel.getDeviceWithId(it.deviceDocId)
         }
     }
 
@@ -75,7 +74,34 @@ class LocationDetailFragment : Fragment() {
                 }
                 devicesAdapter.submitList(filteredList)
             })
+
+            deviceViewModel.deviceLoadingProgress.observe(viewLifecycleOwner, {
+                when (it) {
+                    is Progress.Loading -> {
+                        progressBar.isVisible = true
+                    }
+                    is Progress.Error -> {
+                        progressBar.isVisible = false
+                        Toast.makeText(activity, it.error, Toast.LENGTH_LONG).show()
+                    }
+                    is Progress.DeviceLoaded -> {
+                        progressBar.isVisible = false
+                        findNavController().navigate(
+                            R.id.action_locationDetailFragment_to_deviceInfoFragment,
+                            it.bundle
+                        )
+                    }
+                    else -> {
+                        progressBar.isVisible = false
+                    }
+                }
+            })
         }
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        deviceViewModel.clear()
     }
 }

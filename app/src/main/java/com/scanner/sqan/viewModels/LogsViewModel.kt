@@ -3,6 +3,7 @@ package com.scanner.sqan.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -28,6 +29,7 @@ class LogsViewModel : ViewModel() {
             _progress.postValue(Progress.Loading)
            try {
                Firebase.firestore.collection(Constants.LOGS)
+                   .orderBy("time",Query.Direction.DESCENDING)
                    .addSnapshotListener { value, error ->
                        error?.let {
                            _progress.postValue(Progress.Error(it.message.toString()))
