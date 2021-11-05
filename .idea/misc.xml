@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/drawable/ic_add.xml" value="0.1935185185185185" />
+        <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/drawable/ic_back.xml" value="0.1935185185185185" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/drawable/ic_lock.xml" value="0.21770833333333334" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/drawable/ic_person.xml" value="0.1375" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/drawable/tv_frame.xml" value="0.1935185185185185" />
@@ -17,6 +18,7 @@
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/locations_list_item.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/login_fragment.xml" value="0.2015625" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/logs_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/logs_list_item.xml" value="0.25" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/qr_fragment.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/rail_header_layout.xml" value="0.12730263157894736" />
         <entry key="..\:/Users/KHAN/Documents/sQan/app/src/main/res/layout/settings_fragment.xml" value="0.17916666666666667" />

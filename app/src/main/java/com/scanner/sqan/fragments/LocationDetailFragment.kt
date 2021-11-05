@@ -8,7 +8,9 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.scanner.sqan.R
 import com.scanner.sqan.adapter.DevicesAdapter
 import com.scanner.sqan.databinding.LocationDetailFragmentBinding
 import com.scanner.sqan.models.Progress
@@ -44,7 +46,10 @@ class LocationDetailFragment : Fragment() {
 
     private fun addClickListener() {
         devicesAdapter.onDeviceItemClickListener {
-            Toast.makeText(activity,it.deviceDocId,Toast.LENGTH_LONG).show()
+            val bundle= Bundle().apply {
+                putParcelable("device",it)
+            }
+            findNavController().navigate(R.id.action_locationDetailFragment_to_deviceInfoFragment,bundle)
         }
     }
 

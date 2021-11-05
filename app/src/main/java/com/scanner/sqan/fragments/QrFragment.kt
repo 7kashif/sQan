@@ -36,11 +36,12 @@ typealias BarcodeAnalyzerListener = (barcode: MutableList<Barcode>) -> Unit
 
 class QrFragment : Fragment() {
     private val requiredPermissions = arrayOf(Manifest.permission.CAMERA)
-    private var processingBarcode = AtomicBoolean(false)
+    private var processingBarcode = AtomicBoolean(true)
     private lateinit var cameraInfo: CameraInfo
     private lateinit var cameraControl: CameraControl
     private lateinit var binding: QrFragmentBinding
     private val viewModel: DeviceViewModel by activityViewModels()
+    private var expect:Boolean=false
 
     private val executor by lazy {
         Executors.newSingleThreadExecutor()
@@ -63,7 +64,7 @@ class QrFragment : Fragment() {
             requestAllPermissions()
         }
         if (allPermissionsGranted()) {
-           if(binding.viewFinder.rootView != null) {
+           binding.viewFinder?.let {
                binding.viewFinder.post {
                    startCamera()
                }
@@ -105,9 +106,9 @@ class QrFragment : Fragment() {
     private fun startCamera() {
 
         // Get screen metrics used to setup camera for full screen resolution
-        val metrics = DisplayMetrics().also { binding.viewFinder.display.getRealMetrics(it) }
-        val screenAspectRatio = aspectRatio(metrics.widthPixels, metrics.heightPixels)
-        val rotation = binding.viewFinder.display.rotation
+        val metrics = DisplayMetrics()
+
+        val screenAspectRatio = aspectRatio(200,200)
 
         // Bind the CameraProvider to the LifeCycleOwner
         val cameraSelector =
@@ -122,13 +123,12 @@ class QrFragment : Fragment() {
             val preview = Preview.Builder()
                 .setTargetAspectRatio(screenAspectRatio)
                 // Set initial target rotation
-                .setTargetRotation(rotation)
                 .build()
 
             preview.setSurfaceProvider(binding.viewFinder.surfaceProvider)
 
             // ImageAnalysis
-            val textBarcodeAnalyzer = initializeAnalyzer(screenAspectRatio, rotation)
+            val textBarcodeAnalyzer = initializeAnalyzer(screenAspectRatio,0)
             cameraProvider.unbindAll()
 
             try {
@@ -171,14 +171,14 @@ class QrFragment : Fragment() {
                     /**
                      * Change update  to true if you want to scan only one barcode or it will continue scaning after detecting for the first time
                      */
-                    if (processingBarcode.compareAndSet(false, true)) {
-                        onBarcodeDetected(barcode)
-                    }
+                   if(processingBarcode.get())
+                       onBarcodeDetected(barcode)
                 })
             }
     }
 
     private fun onBarcodeDetected(barcodes: List<Barcode>) {
+        processingBarcode.set(false)
         if (barcodes.isNotEmpty()) {
 
             //binding.BarcodeValue.text = barcodes[0].rawValue
@@ -211,6 +211,17 @@ class QrFragment : Fragment() {
                 }
             })
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+         viewModel.clear()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startCamera()
+        processingBarcode.set(true)
     }
 
 }

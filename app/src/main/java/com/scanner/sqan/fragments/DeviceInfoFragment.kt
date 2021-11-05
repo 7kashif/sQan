@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.scanner.sqan.R
 import com.scanner.sqan.databinding.DeviceInfoFragmentBinding
@@ -35,6 +36,9 @@ class DeviceInfoFragment : Fragment() {
 
     private fun addObservers() {
         binding.apply {
+            viewModel.locationName.observe(viewLifecycleOwner,{
+                locationId.text = it
+            })
             viewModel.deviceUpdatingProgress.observe(viewLifecycleOwner,{
                 when(it) {
                     is Progress.Loading -> {
@@ -58,13 +62,9 @@ class DeviceInfoFragment : Fragment() {
     private fun setViews() {
         binding.apply {
             deviceName.text = args.device.deviceName
-            locationId.text = args.device.deviceLocationId
-            etDate.setText(getString(R.string.set_editable_text, args.device.lastRepaired))
+            etRepairDate.text = args.device.lastRepaired
             etReport.setText(getString(R.string.set_editable_text, args.device.deviceReport))
-            etDate.setOnClickListener {
-                showDatePickerDialog()
-            }
-            dateInput.setOnClickListener {
+            etRepairDate.setOnClickListener {
                 showDatePickerDialog()
             }
             btnUpdate.setOnClickListener {
@@ -75,8 +75,8 @@ class DeviceInfoFragment : Fragment() {
 
     private fun updateDevice() {
         binding.apply {
-            if (!(etDate.text.isNullOrEmpty() || etReport.text.isNullOrEmpty()))
-                viewModel.updateDeviceInfo(etDate.text.toString(), etReport.text.toString())
+            if (!(etRepairDate.text.isNullOrEmpty() || etReport.text.isNullOrEmpty()))
+                viewModel.updateDeviceInfo(etRepairDate.text.toString(), etReport.text.toString())
             else
                 Toast.makeText(activity,"Can not update empty fields.",Toast.LENGTH_LONG).show()
         }
@@ -101,7 +101,7 @@ class DeviceInfoFragment : Fragment() {
                     else -> "dec"
                 }
                 val date = "$dayOfMonth-$monthString-$year"
-                binding.etDate.setText(getString(R.string.set_editable_text, date))
+                binding.etRepairDate.setText(getString(R.string.set_editable_text, date))
             },
             Calendar.getInstance().get(Calendar.YEAR),
             Calendar.getInstance().get(Calendar.MONTH),
