@@ -27,4 +27,7 @@
     <string name="update">Update</string>
     <string name="set_editable_text">%1$s</string>
     <string name="set_log">%1$s at %2$s was checked by %3$s at %4$s.</string>
+    <string name="settings_will_be_added_later">Settings will be added later.</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

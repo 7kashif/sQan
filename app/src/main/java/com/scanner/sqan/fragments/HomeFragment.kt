@@ -2,8 +2,10 @@ package com.scanner.sqan.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -20,9 +22,10 @@ class HomeFragment : Fragment() {
     ): View {
         binding = HomeFragmentBinding.inflate(inflater)
 
-        val navHost = childFragmentManager.findFragmentById(binding.homeFragmentContainer.id) as NavHostFragment
+        val navHost =
+            childFragmentManager.findFragmentById(binding.homeFragmentContainer.id) as NavHostFragment
         val controller = navHost.navController
-        NavigationUI.setupWithNavController(binding.drawerNavView,controller)
+        NavigationUI.setupWithNavController(binding.drawerNavView, controller)
 
         return binding.root
     }
